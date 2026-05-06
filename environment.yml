@@ -7,13 +7,20 @@ dependencies:
   - pip
   - numpy
   - pandas
+  - pyarrow         # parquet I/O for cell tables
+  - pyyaml          # config loading
+  - scipy
+  - scikit-image
+  - tifffile
   - matplotlib
   - seaborn
-  - scikit-image
   - jupyter
+  - pytest
   - pip:
-    - deepcell
-    - squidpy
-    - cellpose
-    - scanpy
-    - anndata
+      - deepcell    # Mesmer segmentation
+      - cellpose    # comparison segmentation
+      - squidpy     # spatial neighborhood analysis
+      - scanpy      # single-cell analysis / clustering
+      - anndata     # single-cell data structure
+      - lifelines   # survival analysis (Stage 6)
+      - -e .        # editable install of the codex_crc package

@@ -1,0 +1,45 @@
+# Single source of truth for pipeline parameters.
+# All scripts and notebooks should read values from here rather than hardcoding.
+
+project:
+  random_seed: 42
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  results_dir: results
+
+# Channels: order MUST match the TIFF channel index for each spot.
+# This is a representative subset of the Schurch 2020 CRC panel (56 markers total).
+# TODO: replace with the full panel after inspecting an actual TMA spot file
+# and cross-referencing Schurch 2020 Supplementary Table S1 (channel order).
+channels:
+  - DAPI
+  - CD45
+  - CD4
+  - CD8
+  - CD20
+  - CD68
+  - CD163
+  - PanCK
+  - Vimentin
+  - Ki67
+  - aSMA
+  - CD31
+
+segmentation:
+  backend: mesmer            # one of: mesmer, watershed
+  image_mpp: 0.377           # microns per pixel; verify per dataset (Akoya CODEX standard at 20x)
+  nuclear_channel: DAPI
+  membrane_channels:         # summed to form the membrane input for Mesmer
+    - PanCK
+    - CD45
+
+phenotyping:
+  arcsinh_cofactor: 5        # standard for CODEX intensity transform
+  leiden_resolution: 1.0
+  # TODO: cell-type marker thresholds must come from Schurch 2020 Supplementary Table S2.
+
+neighborhood:
+  radius_um: 50              # Schurch 2020 default for cellular neighborhood graph
+  n_neighborhoods: 9         # target CN count to replicate Schurch 2020

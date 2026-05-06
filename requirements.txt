@@ -1,0 +1,5 @@
+# Editable install of the codex-crc package, with dev extras.
+# Heavy ML/spatial dependencies (deepcell, squidpy, scanpy, anndata, cellpose, lifelines)
+# are installed via environment.yml on conda — they are intentionally not pinned here
+# so a lightweight `pip install -r requirements.txt` works without GPU/conda baggage.
+-e .[dev]
