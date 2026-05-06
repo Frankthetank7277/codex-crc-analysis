@@ -69,28 +69,35 @@ Raw CODEX images (.tif)
 ```
 codex-crc-analysis/
 │
+├── configs/
+│   └── default.yaml             # Single source of truth for pipeline parameters
+│
 ├── data/
-│   ├── raw/                  # Raw CODEX image tiles (.tif) — not tracked by git
-│   ├── processed/            # Segmentation masks, cell tables — not tracked by git
-│   └── README.md             # Data access and download instructions
+│   ├── raw/                     # Raw CODEX image tiles (.tif) — not tracked by git
+│   └── processed/               # Segmentation masks, cell tables — not tracked by git
 │
 ├── notebooks/
-│   ├── 01_preprocessing.ipynb
-│   ├── 02_segmentation.ipynb
-│   ├── 03_feature_extraction.ipynb
-│   ├── 04_phenotyping.ipynb
-│   ├── 05_spatial_analysis.ipynb
-│   └── 06_visualization.ipynb
+│   └── 01_preprocessing_qc.ipynb   # End-to-end vertical slice (more added per stage)
 │
-├── src/
-│   ├── preprocess.py         # Image preprocessing utilities
-│   ├── segment.py            # Mesmer segmentation wrapper
-│   ├── phenotype.py          # Clustering and annotation helpers
-│   └── spatial.py            # Squidpy analysis helpers
+├── src/codex_crc/               # Importable as `from codex_crc.<module> import ...`
+│   ├── __init__.py
+│   ├── io.py                    # Config loading, TIFF I/O, cell-feature extraction
+│   ├── segmentation.py          # Mesmer wrapper (watershed fallback)
+│   ├── phenotyping.py           # Arcsinh + Leiden clustering + annotation (stub)
+│   ├── neighborhood.py          # Squidpy spatial neighborhoods (stub)
+│   └── plotting.py              # Visualization helpers
 │
-├── figures/                  # Output figures for README and reports
+├── tests/                       # Pytest suite (one test file per implemented module)
+│   ├── test_io.py
+│   ├── test_segmentation.py
+│   └── test_plotting.py
 │
-├── environment.yml           # Conda environment specification
+├── results/                     # Output figures and tables — not tracked by git
+│
+├── pyproject.toml               # Package metadata + editable install
+├── requirements.txt             # `-e .[dev]` for the pip path
+├── environment.yml              # Conda environment specification (recommended)
+├── CLAUDE.md                    # Project context for Claude Code sessions
 ├── .gitignore
 └── README.md
 ```
@@ -104,7 +111,12 @@ git clone https://github.com/Frankthetank7277/codex-crc-analysis.git
 cd codex-crc-analysis
 conda env create -f environment.yml
 conda activate codex-crc
+pytest -q                                     # verify install
+jupyter lab notebooks/01_preprocessing_qc.ipynb   # run the first vertical slice
 ```
+
+The notebook generates a synthetic CODEX-like image when `data/raw/` is empty,
+so the pipeline runs end-to-end before any real data is downloaded.
 
 **Core dependencies:**
 
