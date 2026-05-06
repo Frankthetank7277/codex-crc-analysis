@@ -76,6 +76,11 @@ codex-crc-analysis/
 │   ├── raw/                     # Raw CODEX image tiles (.tif) — not tracked by git
 │   └── processed/               # Segmentation masks, cell tables — not tracked by git
 │
+├── docs/
+│   ├── data_dictionary.md       # Dataset schema, marker panel, cell-table columns
+│   ├── analysis_plan.md         # Pipeline stages, decisions, evaluation criteria
+│   └── checkpoints/             # Per-stage checkpoint reports
+│
 ├── notebooks/
 │   └── 01_preprocessing_qc.ipynb   # End-to-end vertical slice (more added per stage)
 │
