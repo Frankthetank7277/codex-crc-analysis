@@ -2,6 +2,11 @@
 
 Stage 4 of the pipeline. Cell-type annotation thresholds and marker panels
 must be grounded in Schurch 2020 Supplementary Table S2 — do not invent thresholds.
+
+STATUS: intentionally stubbed. Only `arcsinh_transform` is implemented (it is
+data-shape-agnostic and safe to use). `leiden_cluster` and `annotate_cell_types`
+are deliberately deferred until a real cell table from segmentation is available
+to calibrate clustering resolution and Table S2 marker thresholds against.
 """
 
 from typing import Sequence

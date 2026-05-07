@@ -1,3 +1,17 @@
+# =============================================================================
+# !!! TODO — PLACEHOLDER CHANNEL PANEL !!!
+#
+# The `channels:` list below is a 12-marker REPRESENTATIVE SUBSET of the
+# Schurch 2020 CRC panel, which contains 56 markers in total. It is wired up
+# this way only so the smoke-test notebook can run end-to-end before real data
+# is downloaded. Any real analysis WILL produce wrong results until this list
+# is replaced with the full 56-marker panel, in the exact channel order of the
+# TMA TIFFs, cross-referenced against Schurch 2020 Supplementary Table S1.
+#
+# Action item: after the first real TMA spot lands in data/raw/, replace the
+# `channels:` list with the full panel and remove this banner.
+# =============================================================================
+
 # Single source of truth for pipeline parameters.
 # All scripts and notebooks should read values from here rather than hardcoding.
 
@@ -10,9 +24,7 @@ paths:
   results_dir: results
 
 # Channels: order MUST match the TIFF channel index for each spot.
-# This is a representative subset of the Schurch 2020 CRC panel (56 markers total).
-# TODO: replace with the full panel after inspecting an actual TMA spot file
-# and cross-referencing Schurch 2020 Supplementary Table S1 (channel order).
+# Placeholder subset — see banner at top of file.
 channels:
   - DAPI
   - CD45
