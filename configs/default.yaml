@@ -1,17 +1,3 @@
-# =============================================================================
-# !!! TODO — PLACEHOLDER CHANNEL PANEL !!!
-#
-# The `channels:` list below is a 12-marker REPRESENTATIVE SUBSET of the
-# Schurch 2020 CRC panel, which contains 56 markers in total. It is wired up
-# this way only so the smoke-test notebook can run end-to-end before real data
-# is downloaded. Any real analysis WILL produce wrong results until this list
-# is replaced with the full 56-marker panel, in the exact channel order of the
-# TMA TIFFs, cross-referenced against Schurch 2020 Supplementary Table S1.
-#
-# Action item: after the first real TMA spot lands in data/raw/, replace the
-# `channels:` list with the full panel and remove this banner.
-# =============================================================================
-
 # Single source of truth for pipeline parameters.
 # All scripts and notebooks should read values from here rather than hardcoding.
 
@@ -23,28 +9,76 @@ paths:
   processed_dir: data/processed
   results_dir: results
 
-# Channels: order MUST match the TIFF channel index for each spot.
-# Placeholder subset — see banner at top of file.
+# Full Schurch 2020 CRC CODEX panel: 56 protein markers + 2 nuclear stains.
+# Order = acquisition order (cycle / fluorophore channel).
+# Index in this list MUST match the TIFF channel index for each TMA spot.
+# Reference: Schurch CM et al., Cell 182(5), 2020, Supplementary Table S1.
 channels:
-  - DAPI
-  - CD45
-  - CD4
-  - CD8
-  - CD20
-  - CD68
-  - CD163
-  - PanCK
-  - Vimentin
-  - Ki67
-  - aSMA
-  - CD31
+  - "Hoechst (DAPI)"          # 0  — nuclear segmentation
+  - CD44                      # 1  — Cycle 2,  Alexa488
+  - FoxP3                     # 2  — Cycle 2,  ATTO550
+  - CDX2                      # 3  — Cycle 2,  Alexa647
+  - CD8                       # 4  — Cycle 3,  Alexa488
+  - p53                       # 5  — Cycle 3,  ATTO550
+  - GATA3                     # 6  — Cycle 3,  Alexa647
+  - CD45                      # 7  — Cycle 4,  Alexa488
+  - T-bet                     # 8  — Cycle 4,  ATTO550
+  - b-catenin                 # 9  — Cycle 4,  Alexa647
+  - HLA-DR                    # 10 — Cycle 5,  Alexa488
+  - CD274_PD-L1               # 11 — Cycle 5,  ATTO550
+  - Ki-67                     # 12 — Cycle 5,  Alexa647
+  - CD45RA                    # 13 — Cycle 6,  Alexa488
+  - CD4                       # 14 — Cycle 6,  ATTO550
+  - CD21                      # 15 — Cycle 6,  Alexa647
+  - MUC-1_EMA                 # 16 — Cycle 7,  Alexa488
+  - CD30                      # 17 — Cycle 7,  ATTO550
+  - CD2                       # 18 — Cycle 7,  Alexa647
+  - Vimentin                  # 19 — Cycle 8,  Alexa488
+  - CD20                      # 20 — Cycle 8,  ATTO550
+  - CD223_LAG3                # 21 — Cycle 8,  Alexa647
+  - Na-K-ATPase               # 22 — Cycle 9,  Alexa488
+  - CD5                       # 23 — Cycle 9,  ATTO550
+  - IDO-1                     # 24 — Cycle 9,  Alexa647
+  - Pan-Cytokeratin           # 25 — Cycle 10, Alexa488
+  - CD11b                     # 26 — Cycle 10, ATTO550
+  - CD56                      # 27 — Cycle 10, Alexa647
+  - a-SMA                     # 28 — Cycle 11, Alexa488
+  - BCL-2                     # 29 — Cycle 11, ATTO550
+  - CD25                      # 30 — Cycle 11, Alexa647
+  - Collagen-IV               # 31 — Cycle 12, Alexa488
+  - CD11c                     # 32 — Cycle 12, ATTO550
+  - CD279_PD-1                # 33 — Cycle 12, Alexa647
+  - Granzyme-B                # 34 — Cycle 13, Alexa488
+  - EGFR                      # 35 — Cycle 13, ATTO550
+  - VISTA                     # 36 — Cycle 13, Alexa647
+  - CD15                      # 37 — Cycle 14, Alexa488
+  - CD194_CCR4                # 38 — Cycle 14, ATTO550
+  - CD278_ICOS                # 39 — Cycle 14, Alexa647
+  - MMP9                      # 40 — Cycle 15, Alexa488
+  - Synaptophysin             # 41 — Cycle 15, ATTO550
+  - CD71                      # 42 — Cycle 15, Alexa647
+  - GFAP                      # 43 — Cycle 16, Alexa488
+  - CD7                       # 44 — Cycle 16, ATTO550
+  - CD3                       # 45 — Cycle 16, Alexa647
+  - Chromogranin-A            # 46 — Cycle 17, Alexa488
+  - CD163                     # 47 — Cycle 17, ATTO550
+  - CD57                      # 48 — Cycle 17, Alexa647
+  - CD45RO                    # 49 — Cycle 18, ATTO550
+  - CD68                      # 50 — Cycle 18, Alexa647
+  - CD31                      # 51 — Cycle 19, ATTO550
+  - Podoplanin                # 52 — Cycle 19, Alexa647
+  - CD34                      # 53 — Cycle 20, ATTO550
+  - CD38                      # 54 — Cycle 20, Alexa647
+  - CD138                     # 55 — Cycle 21, ATTO550
+  - MMP12                     # 56 — Cycle 21, Alexa647
+  - DRAQ5                     # 57 — Cycle 23, Alexa647 (QC nuclear stain only)
 
 segmentation:
   backend: mesmer            # one of: mesmer, watershed
   image_mpp: 0.377           # microns per pixel; verify per dataset (Akoya CODEX standard at 20x)
-  nuclear_channel: DAPI
+  nuclear_channel: "Hoechst (DAPI)"
   membrane_channels:         # summed to form the membrane input for Mesmer
-    - PanCK
+    - Pan-Cytokeratin
     - CD45
 
 phenotyping:
@@ -54,4 +88,5 @@ phenotyping:
 
 neighborhood:
   radius_um: 50              # Schurch 2020 default for cellular neighborhood graph
+  n_neighbors: 10            # Schurch 2020: k for kNN spatial graph (CN construction)
   n_neighborhoods: 9         # target CN count to replicate Schurch 2020
