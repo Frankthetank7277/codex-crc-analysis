@@ -115,7 +115,8 @@ codex-crc-analysis/
 
 - [ ] Repo scaffolded
 - [ ] README written
-- [ ] `configs/default.yaml` populated
+- [x] `configs/default.yaml` populated  <!-- full 56-marker panel + 2 nuclear stains, acquisition order; 2026-05-08 -->
+
 - [ ] `src/` modules stubbed
 - [ ] First thin vertical slice working
 - [ ] Data downloaded
